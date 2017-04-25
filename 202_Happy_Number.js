@@ -1,18 +1,19 @@
 function evaluate(element,index,array){
 	return Math.sqrt(element);
 }
-var mem={};
 
 function happyNumCheck(x){
-	
-	var dis=x.toString().split('');
-    var temp=0;
-    temp = temp +dis.forEach(evaluate);
-	mem.push(temp);	
+	var temp;
+	var mem={};
+	while(temp != 1 && !mem[x]){
+	 
+	    temp = x.toString().split('').reduce(evaluate);
 
-	//mem.every()
+		mem[x]=temp;
 
-	while(temp != 1){
-		happyNumCheck(temp);
+		x = temp;	
+		
 	}
+	return temp===1? true : false;
 }
+console.log(happyNumCheck(19));//true
