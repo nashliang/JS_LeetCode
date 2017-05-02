@@ -18,5 +18,5 @@ LinkedList.prototype.arrayToList = function(array){
 };
 
 var x=new LinkedList();
-x.arrayToList([2,3]);
+x.arrayToList([1,2,2,3]);
 console.log(x);
