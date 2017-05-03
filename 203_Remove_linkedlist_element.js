@@ -30,24 +30,36 @@ LinkedList.prototype.removeElements = function(array,value){
 
 	var x = new LinkedList();
 	x.arrayToList(array);
+	
+	var currentNode = x.head;
 
-// var currentNode = x.head 寫這樣的話 如果刪除的值在整個list的頭或尾就會fail
-	var node = new LinkedList();
-	var currentNode = node;
-	currentNode.next = x.head;
 	while(currentNode){
 		if(currentNode.value === value)
 			{
+				if(currentNode.prev === null)  //要刪的值在頭
+				{
+					currentNode.next.prev = null;	
+					return x.head.next;				
+				}
+				else if(currentNode.next === null)  //要刪的值在尾
+				{
+					currentNode.prev.next = null;
+					x.tail=null;
+					return x;										
+				}
+				else
+				{
 				currentNode.prev.next = currentNode.next;
 				currentNode.next.prev = currentNode.prev;
+				}
 			}
 
 		currentNode = currentNode.next;
 	}
-	console.log(x);
+	return x;
 };
 
 
 var x = new LinkedList();
 
-console.log(x.removeElements([1,5,7],7));
+console.log(x.removeElements([1,2,6,3,4,5,6],6));  //  1-> 2-> 3-> 4-> 5
